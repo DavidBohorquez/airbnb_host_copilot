@@ -1,0 +1,19 @@
+# Secrets
+.env
+
+# Data — too large for GitHub (see docs/DATA.md to fetch)
+data_airbnb_bordeaux/
+*.csv
+*.geojson
+
+# Build artifacts / vector store
+artifacts/
+*.npy
+*.faiss
+
+# Python / uv
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/

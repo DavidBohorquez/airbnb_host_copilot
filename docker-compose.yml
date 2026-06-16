@@ -1,0 +1,40 @@
+# Full stack. Completed in M11 (docs/12_docker.md).
+# app  = FastAPI service (this repo)
+# chroma = persistent vector DB
+# ollama = local LLM server (skip if you only use API providers)
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      CHROMA_DIR: /data/chroma
+      OLLAMA_HOST: http://ollama:11434
+    volumes:
+      - artifacts:/data
+    depends_on:
+      - chroma
+      - ollama
+
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma:/chroma/chroma
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+volumes:
+  artifacts:
+  chroma:
+  ollama:
