@@ -46,7 +46,7 @@ class Settings(BaseSettings):
 
     @property
     def chroma_path(self) -> Path:
-        return REPO_ROOT / self.chroma_dir
+        return REPO_ROOT     / self.chroma_dir
 
 
 @lru_cache
