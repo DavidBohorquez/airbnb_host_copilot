@@ -42,7 +42,7 @@ def peer_key(neighbourhood: str, room_type: str, accommodates: int) -> str:
 
 def load_listings() -> pd.DataFrame:
     """Read listings.csv, clean price, drop dead rows, add peer_key column."""
-    df = pd.read_csv(get_settings().data_path / "listings.csv")
+    df = pd.read_csv(get_settings().data_path / "listings.csv", encoding="utf-8")
     df["price"] = df["price"].map(parse_price)
     df = df.dropna(subset=_KEY_COLS)
     df = df[df["description"].str.strip() != ""]
