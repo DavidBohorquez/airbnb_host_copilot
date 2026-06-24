@@ -59,5 +59,21 @@ class ChromaStore:
             )
         return out
 
+    def get(self, listing_id) -> dict:
+        got = self.collection.get(
+            ids=[str(listing_id)], include=["embeddings", "metadatas", "documents"]
+        )
+        if not got["ids"]:
+            raise KeyError(listing_id)
+        return {
+            "id": got["ids"][0],
+            "embedding": np.asarray(got["embeddings"][0]),
+            "metadata": got["metadatas"][0],
+            "document": got["documents"][0],
+        }
+
+    def get_group(self, peer_key: str) -> dict:
+        return self.collection.get(where={"peer_key": peer_key}, include=["documents", "metadatas"])
+
     def count(self) -> int:
         return self.collection.count()
