@@ -1,4 +1,4 @@
-# M7 — Analytics tools
+  # M7 — Analytics tools
 
 **Goal:** the functions that compute hard numbers the LLM cannot eyeball. Each returns a typed dict; no
 prose (the LLM writes prose in M9).
